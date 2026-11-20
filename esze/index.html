@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="robots" content="noindex, nofollow">
+<title>ESZE Güzellik Merkezi · Yalova (Tasarım Örneği)</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --cream:#faf6f1; --sand:#efe6dc; --rose:#c9897a; --rose-d:#96594c;
+    --ink:#2b2522; --muted:#6b605a; --white:#fff;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  body{font-family:Inter,system-ui,sans-serif;background:var(--cream);color:var(--ink);line-height:1.6}
+  a{color:inherit;text-decoration:none}
+  .demo-bar{background:var(--ink);color:#f3e9e3;font-size:13px;text-align:center;padding:8px 12px}
+  .demo-bar b{color:#f0b9a9}
+  header{display:flex;justify-content:space-between;align-items:center;padding:18px 6vw;position:sticky;top:0;background:rgba(250,246,241,.92);backdrop-filter:blur(8px);z-index:10;border-bottom:1px solid var(--sand)}
+  .logo{font-family:"Cormorant Garamond",serif;font-size:28px;font-weight:600;letter-spacing:4px}
+  .logo span{display:block;font-family:Inter;font-size:11px;letter-spacing:3px;color:var(--muted);font-weight:500}
+  nav a{margin-left:22px;font-size:14px;color:var(--muted)}
+  nav a:hover{color:var(--rose-d)}
+  .hero{padding:80px 6vw 70px;display:grid;grid-template-columns:1.1fr .9fr;gap:48px;align-items:center}
+  .eyebrow{font-size:12px;letter-spacing:3px;color:var(--rose-d);text-transform:uppercase;font-weight:600}
+  h1{font-family:"Cormorant Garamond",serif;font-size:clamp(40px,5.5vw,64px);line-height:1.08;font-weight:500;margin:14px 0 18px}
+  .lead{color:var(--muted);font-size:17px;max-width:520px}
+  .btns{margin-top:30px;display:flex;gap:12px;flex-wrap:wrap}
+  .btn{padding:14px 26px;border-radius:40px;font-weight:600;font-size:15px;display:inline-flex;align-items:center;gap:8px}
+  .btn-wa{background:#25d366;color:#0b3d1f}
+  .btn-ghost{border:1.5px solid var(--ink)}
+  .rating{margin-top:26px;font-size:14px;color:var(--muted)}
+  .rating b{color:var(--ink);font-size:18px}
+  .stars{color:#e0a43a;letter-spacing:2px}
+  .hero-card{aspect-ratio:4/5;border-radius:200px 200px 24px 24px;background:linear-gradient(160deg,#e9cfc4,#c9897a 70%,#a96a5c);position:relative;overflow:hidden;box-shadow:0 30px 60px -30px rgba(169,106,92,.6)}
+  .hero-card::after{content:"Fotoğraflarınız buraya";position:absolute;inset:auto 0 28px 0;text-align:center;color:#fff;font-size:13px;letter-spacing:2px;opacity:.85}
+  section{padding:70px 6vw}
+  h2{font-family:"Cormorant Garamond",serif;font-size:clamp(32px,4vw,44px);font-weight:500;margin-bottom:10px}
+  .sub{color:var(--muted);margin-bottom:36px}
+  .services{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:18px}
+  .card{background:var(--white);border-radius:20px;padding:28px;border:1px solid var(--sand);transition:transform .2s}
+  .card:hover{transform:translateY(-4px)}
+  .card .ic{width:46px;height:46px;border-radius:50%;background:var(--sand);display:grid;place-items:center;font-size:20px;margin-bottom:16px}
+  .card h3{font-size:18px;margin-bottom:6px}
+  .card p{font-size:14px;color:var(--muted)}
+  .why{background:var(--sand)}
+  .why-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:26px}
+  .why-grid div{border-top:2px solid var(--rose);padding-top:14px}
+  .why-grid h3{font-size:16px;margin-bottom:4px}
+  .why-grid p{font-size:14px;color:var(--muted)}
+  .reviews-box{background:var(--white);border-radius:24px;padding:40px;text-align:center;border:1px dashed var(--rose)}
+  .reviews-box .big{font-family:"Cormorant Garamond",serif;font-size:64px;line-height:1}
+  .contact{display:grid;grid-template-columns:1fr 1fr;gap:30px}
+  .info p{margin-bottom:14px}
+  .info small{display:block;color:var(--muted);font-size:12px;letter-spacing:2px;text-transform:uppercase}
+  .map{border-radius:20px;overflow:hidden;min-height:280px;border:1px solid var(--sand)}
+  .map iframe{width:100%;height:100%;min-height:280px;border:0}
+  footer{text-align:center;padding:30px;font-size:13px;color:var(--muted);border-top:1px solid var(--sand)}
+  .float-wa{position:fixed;right:20px;bottom:20px;width:58px;height:58px;border-radius:50%;background:#25d366;display:grid;place-items:center;box-shadow:0 10px 25px rgba(0,0,0,.2);font-size:28px;color:#0b3d1f;z-index:20}
+  @media(max-width:820px){
+    nav{display:none}
+    .hero{grid-template-columns:1fr;padding-top:40px}
+    .hero-card{width:100%;max-width:340px;margin:0 auto}
+    .contact{grid-template-columns:1fr}
+  }
+</style>
+</head>
+<body>
+
+<div class="demo-bar">Bu sayfa <b>Cyexs Dev</b> tarafından hazırlanmış bir <b>tasarım örneğidir</b>, işletmenin resmi sitesi değildir.</div>
+
+<header>
+  <div class="logo">ESZE<span>GÜZELLİK MERKEZİ</span></div>
+  <nav>
+    <a href="#hizmetler">Hizmetler</a>
+    <a href="#neden">Neden Biz</a>
+    <a href="#yorumlar">Yorumlar</a>
+    <a href="#iletisim">İletişim</a>
+  </nav>
+</header>
+
+<section class="hero">
+  <div>
+    <div class="eyebrow">Yalova · Rüstem Paşa</div>
+    <h1>Cildinize hak ettiği özeni gösterin.</h1>
+    <p class="lead">Lazer epilasyon, cilt bakımı ve iğnesiz mezoterapide hijyen ve kişiye özel ilgiyle hizmet veriyoruz.</p>
+    <div class="btns">
+      <a class="btn btn-wa" href="https://wa.me/905379730791?text=Merhaba%2C%20randevu%20almak%20istiyorum." target="_blank">💬 WhatsApp'tan Randevu</a>
+      <a class="btn btn-ghost" href="tel:+905379730791">📞 Hemen Ara</a>
+    </div>
+    <div class="rating"><span class="stars">★★★★★</span> <b>4,9</b> · Google'da 95 değerlendirme</div>
+  </div>
+  <div class="hero-card"></div>
+</section>
+
+<section id="hizmetler">
+  <h2>Hizmetlerimiz</h2>
+  <p class="sub">Fiyat ve paket bilgisi için WhatsApp'tan yazabilirsiniz.</p>
+  <div class="services">
+    <div class="card"><div class="ic">✨</div><h3>Lazer Epilasyon</h3><p>Uygulanacak bölgeler ve seans planı için bize danışın.</p></div>
+    <div class="card"><div class="ic">💧</div><h3>Cilt Bakımı</h3><p>Cilt tipinize uygun bakım için bize danışın.</p></div>
+    <div class="card"><div class="ic">🌿</div><h3>İğnesiz Mezoterapi</h3><p>İğne kullanılmadan uygulanan cilt bakımı.</p></div>
+  </div>
+</section>
+
+<section class="why" id="neden">
+  <h2>Neden ESZE?</h2>
+  <p class="sub">Müşterilerimizin bizi en çok tavsiye ettiği konular:</p>
+  <div class="why-grid">
+    <div><h3>Hijyen</h3><p>Yorumlarda temiz ve düzenli ortam en çok öne çıkan konu.</p></div>
+    <div><h3>Birebir ilgi</h3><p>Müşteriler sorularına sabırla cevap verildiğini anlatıyor.</p></div>
+    <div><h3>Sonuç</h3><p>Uygulamaların sonuçlarından memnun kalan çok sayıda müşteri var.</p></div>
+  </div>
+</section>
+
+<section id="yorumlar">
+  <div class="reviews-box">
+    <div class="big">4,9 ★</div>
+    <p style="margin:10px 0 4px"><b>95 Google değerlendirmesi</b></p>
+    <p class="sub" style="margin:0">Gerçek müşteri yorumlarınız bu alanda Google'dan otomatik olarak gösterilecek.</p>
+  </div>
+</section>
+
+<section id="iletisim">
+  <h2>Bize Ulaşın</h2>
+  <p class="sub">Randevu için WhatsApp'tan yazmanız yeterli.</p>
+  <div class="contact">
+    <div class="info">
+      <p><small>Adres</small>Tecimer Apartmanı, Harmanlar Sk. No:1/2<br>Rüstem Paşa, 77200 Yalova Merkez</p>
+      <p><small>Telefon / WhatsApp</small>0537 973 07 91</p>
+      <p><small>Çalışma Saatleri</small>__ – __ · __:__ – __:__</p>
+      <a class="btn btn-wa" href="https://wa.me/905379730791" target="_blank" style="margin-top:8px">💬 WhatsApp'tan Yazın</a>
+    </div>
+    <div class="map">
+      <iframe loading="lazy" src="https://www.google.com/maps?q=40.6540465,29.2710191&z=17&output=embed"></iframe>
+    </div>
+  </div>
+</section>
+
+<footer>© ESZE Güzellik Merkezi · Yalova &nbsp;|&nbsp; Tasarım örneği: Cyexs Dev · cyexs.dev</footer>
+
+<a class="float-wa" href="https://wa.me/905379730791" target="_blank" aria-label="WhatsApp">💬</a>
+
+</body>
+</html>
