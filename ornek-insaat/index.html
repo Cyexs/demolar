@@ -1,0 +1,319 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="robots" content="noindex, nofollow">
+<title>Dörtgen Yapı (Örnek Tasarım) · Cyexs Dev</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;500;600;800;900&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#eceae5; --paper:#f7f6f2; --ink:#121212; --steel:#2c2f33; --muted:#55585c;
+    --orange:#ff5a1f; --orange-d:#a8320a; --line:#c9c6bf;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html{scroll-behavior:smooth}
+  body{font-family:Archivo,system-ui,sans-serif;background:var(--bg);color:var(--ink);line-height:1.6;font-size:16px}
+  a{color:inherit;text-decoration:none}
+  .wrap{max-width:1240px;margin:0 auto;padding:0 24px}
+  .mono{font-family:"IBM Plex Mono",monospace}
+
+  .demo-bar{background:var(--ink);color:#ddd;font-size:13px;text-align:center;padding:8px 16px}
+  .demo-bar a{color:var(--orange);font-weight:600}
+
+  header{background:var(--paper);border-bottom:2px solid var(--ink);position:sticky;top:0;z-index:20}
+  .nav{display:flex;align-items:stretch;justify-content:space-between;height:72px}
+  .logo{display:flex;align-items:center;gap:12px;font-weight:900;font-size:20px;letter-spacing:-.3px;text-transform:uppercase}
+  .logo small{display:block;font-family:"IBM Plex Mono",monospace;font-weight:400;font-size:11px;text-transform:none;color:var(--muted);letter-spacing:0}
+  nav{display:flex}
+  nav a{display:flex;align-items:center;padding:0 22px;font-weight:600;font-size:14.5px;border-left:1px solid var(--line)}
+  nav a:hover{background:var(--ink);color:var(--paper)}
+  .nav-cta{display:flex;align-items:center;padding:0 26px;background:var(--orange);color:var(--ink);font-weight:800;font-size:14.5px;border-left:2px solid var(--ink)}
+  .nav-cta:hover{background:var(--ink);color:var(--orange)}
+
+  .hero{position:relative;border-bottom:2px solid var(--ink);overflow:hidden;
+    background-image:linear-gradient(var(--line) 1px,transparent 1px),linear-gradient(90deg,var(--line) 1px,transparent 1px);
+    background-size:48px 48px;background-color:var(--bg)}
+  .hero .wrap{display:grid;grid-template-columns:1.15fr .85fr;min-height:620px;max-width:none;padding-right:0;padding-left:max(24px,calc((100vw - 1192px) / 2))}
+  .hero-txt{padding:72px 40px 60px 0;display:flex;flex-direction:column;justify-content:center}
+  .code{font-family:"IBM Plex Mono",monospace;font-size:13px;color:var(--orange-d);font-weight:500}
+  h1{font-weight:900;font-size:clamp(42px,5.4vw,78px);line-height:.92;letter-spacing:-3px;text-transform:uppercase;margin:18px 0 24px}
+  h1 span{color:var(--orange);-webkit-text-stroke:0}
+  .hero p{font-size:18px;color:var(--steel);max-width:520px;background:var(--bg)}
+  .cta{display:flex;gap:0;margin-top:34px;flex-wrap:wrap}
+  .btn{display:inline-flex;align-items:center;gap:12px;padding:16px 26px;font-weight:800;font-size:15px;border:2px solid var(--ink);background:var(--paper)}
+  .btn + .btn{border-left:0}
+  .btn-o{background:var(--ink);color:var(--paper)}
+  .btn:hover{background:var(--orange);color:var(--ink)}
+  .hero-art{border-left:2px solid var(--ink);background:var(--steel);position:relative;display:flex;align-items:flex-end;justify-content:center;overflow:hidden}
+  .hero-art svg{width:92%;height:auto}
+  .hero-art .lbl{position:absolute;top:18px;left:18px;font-family:"IBM Plex Mono",monospace;font-size:12px;color:#c9ccd0;border:1px solid #6b7076;padding:4px 10px}
+
+  .stats{background:var(--ink);color:var(--paper)}
+  .stats .wrap{display:grid;grid-template-columns:repeat(4,1fr)}
+  .stats div{padding:30px 24px;border-left:1px solid #333}
+  .stats div:first-child{border-left:0;padding-left:0}
+  .stats b{display:block;font-size:44px;font-weight:900;letter-spacing:-1.5px;color:var(--orange);line-height:1.1}
+  .stats span{font-size:14px;color:#bbb}
+  .stats-note{background:var(--ink);color:#999;font-family:"IBM Plex Mono",monospace;font-size:12px;text-align:center;padding:0 0 16px}
+
+  section{padding:90px 0;border-bottom:2px solid var(--ink)}
+  .head{display:grid;grid-template-columns:auto 1fr;gap:28px;align-items:end;margin-bottom:46px}
+  .head .num{font-family:"IBM Plex Mono",monospace;font-size:14px;color:var(--orange-d);padding-bottom:10px}
+  .head h2{font-weight:900;font-size:clamp(34px,4.6vw,58px);line-height:.98;letter-spacing:-1.8px;text-transform:uppercase}
+  .head p{grid-column:2;color:var(--muted);max-width:560px}
+
+  .svc{display:grid;grid-template-columns:repeat(3,1fr);border-top:2px solid var(--ink);border-left:2px solid var(--ink)}
+  .svc article{border-right:2px solid var(--ink);border-bottom:2px solid var(--ink);padding:30px 28px 34px;background:var(--paper);transition:background .2s}
+  .svc article:hover{background:var(--orange)}
+  .svc .mono{font-size:12.5px;color:var(--muted)}
+  .svc article:hover .mono{color:var(--ink)}
+  .svc h3{font-size:22px;font-weight:800;margin:14px 0 8px;letter-spacing:-.3px}
+  .svc p{font-size:15px;color:var(--steel)}
+
+  .filters{display:flex;flex-wrap:wrap;margin-bottom:24px}
+  .filters button{font:inherit;font-weight:700;font-size:14px;padding:10px 18px;background:var(--paper);border:2px solid var(--ink);cursor:pointer;margin-right:-2px}
+  .filters button.on{background:var(--ink);color:var(--paper)}
+  .projects{display:grid;grid-template-columns:repeat(3,1fr);gap:20px}
+  .pj{background:var(--paper);border:2px solid var(--ink)}
+  .pj .img{height:200px;border-bottom:2px solid var(--ink);display:flex;align-items:flex-end;justify-content:center;background:#d8d5ce;position:relative}
+  .pj .img span{position:absolute;top:10px;right:10px;font-family:"IBM Plex Mono",monospace;font-size:11px;background:var(--ink);color:var(--paper);padding:3px 8px}
+  .pj .img svg{height:84%;width:auto}
+  .pj .t{padding:18px 20px}
+  .pj h3{font-size:18px;font-weight:800}
+  .pj p{font-family:"IBM Plex Mono",monospace;font-size:12.5px;color:var(--muted);margin-top:4px}
+  .pj.hide{display:none}
+
+  .process{display:grid;grid-template-columns:repeat(5,1fr);gap:0;counter-reset:p}
+  .process li{list-style:none;border-top:6px solid var(--ink);padding:18px 18px 0 0}
+  .process li:nth-child(odd){border-color:var(--orange)}
+  .process li::before{counter-increment:p;content:"ADIM 0" counter(p);font-family:"IBM Plex Mono",monospace;font-size:12px;color:var(--orange-d);display:block;margin-bottom:10px}
+  .process b{display:block;font-size:18px;font-weight:800;margin-bottom:6px}
+  .process span{font-size:14.5px;color:var(--steel)}
+
+  .refs{display:grid;grid-template-columns:repeat(6,1fr);border-top:2px solid var(--ink);border-left:2px solid var(--ink)}
+  .refs div{border-right:2px solid var(--ink);border-bottom:2px solid var(--ink);height:110px;display:grid;place-items:center;font-weight:800;color:var(--muted);background:var(--paper);text-align:center;font-size:14px;padding:8px}
+  .refs-note{margin-top:16px;font-family:"IBM Plex Mono",monospace;font-size:12.5px;color:var(--muted)}
+
+  .contact{background:var(--orange);border-bottom:0}
+  .contact .wrap{display:grid;grid-template-columns:1.1fr .9fr;gap:48px;align-items:center}
+  .contact h2{font-weight:900;font-size:clamp(40px,6vw,80px);line-height:.92;letter-spacing:-2.5px;text-transform:uppercase}
+  .contact p{font-size:18px;margin-top:18px;max-width:480px}
+  .contact .btn{background:var(--ink);color:var(--paper)}
+  .contact .btn:hover{background:var(--paper);color:var(--ink)}
+  .ct{background:var(--paper);border:2px solid var(--ink)}
+  .ct div{display:grid;grid-template-columns:110px 1fr;border-bottom:2px solid var(--ink)}
+  .ct div:last-child{border-bottom:0}
+  .ct small{font-family:"IBM Plex Mono",monospace;font-size:12px;padding:16px;border-right:2px solid var(--ink);color:var(--muted)}
+  .ct span{padding:14px 16px;font-weight:700;overflow-wrap:anywhere;min-width:0}
+  .contact .wrap>*{min-width:0}
+
+  footer{background:var(--ink);color:#aaa;font-size:13.5px;padding:26px 0}
+  footer .wrap{display:flex;justify-content:space-between;flex-wrap:wrap;gap:12px}
+  footer a{color:var(--orange)}
+
+  @media (max-width:980px){
+    nav{display:none}
+    .hero .wrap{grid-template-columns:1fr;min-height:0;padding-right:24px}
+    .hero-txt{padding:52px 0 44px}
+    .hero-art{border-left:0;border-top:2px solid var(--ink);margin:0 -24px;height:280px}
+    .stats .wrap{grid-template-columns:1fr 1fr}
+    .stats div:nth-child(3){border-left:0;padding-left:0}
+    .svc,.projects{grid-template-columns:1fr 1fr}
+    .process{grid-template-columns:1fr 1fr;gap:24px 20px}
+    .refs{grid-template-columns:repeat(3,1fr)}
+    .contact .wrap{grid-template-columns:1fr}
+    section{padding:64px 0}
+  }
+  @media (max-width:600px){
+    .svc,.projects,.process{grid-template-columns:1fr}
+    .head{grid-template-columns:1fr;gap:6px}
+    .head p{grid-column:1}
+    .refs{grid-template-columns:1fr 1fr}
+    .nav-cta{padding:0 16px}
+    .logo small{display:none}
+    .stats b{font-size:34px}
+    .btn + .btn{border-left:2px solid var(--ink);border-top:0}
+    .cta{flex-direction:column;align-items:stretch}
+  }
+</style>
+</head>
+<body>
+
+<div class="demo-bar">Bu sayfa <a href="https://cyexs.dev">Cyexs Dev</a>'in hazırladığı örnek bir tasarımdır; işletme hayalidir.</div>
+
+<header>
+  <div class="wrap nav">
+    <a class="logo" href="#">
+      <svg width="38" height="38" viewBox="0 0 38 38" aria-hidden="true"><rect x="1" y="1" width="36" height="36" fill="none" stroke="#121212" stroke-width="2"/><rect x="8" y="8" width="22" height="22" fill="#ff5a1f"/><rect x="15" y="15" width="8" height="8" fill="#121212"/></svg>
+      <span>Dörtgen Yapı<small>inşaat · mühendislik · taahhüt</small></span>
+    </a>
+    <nav>
+      <a href="#hizmetler">Hizmetler</a>
+      <a href="#projeler">Projeler</a>
+      <a href="#surec">Süreç</a>
+      <a href="#referanslar">Referanslar</a>
+    </nav>
+    <a class="nav-cta" href="#iletisim">Teklif iste</a>
+  </div>
+</header>
+
+<main>
+  <section class="hero" style="padding:0">
+    <div class="wrap">
+      <div class="hero-txt">
+        <span class="code">// konut · ticari yapı · tadilat</span>
+        <h1>Sözleşmede ne yazıyorsa <span>onu</span> teslim ederiz</h1>
+        <p>Projeyi çizen, şantiyeyi yöneten ve anahtarı teslim eden aynı ekip. Her aşamada neyin bittiğini, neyin kaldığını yazılı olarak bilirsiniz.</p>
+        <div class="cta">
+          <a class="btn btn-o" href="#iletisim">Keşif randevusu al →</a>
+          <a class="btn" href="#projeler">Projelere bak</a>
+        </div>
+      </div>
+      <div class="hero-art" aria-hidden="true">
+        <span class="lbl">şantiye fotoğrafı alanı</span>
+        <svg viewBox="0 0 400 360">
+          <g fill="none" stroke="#ff5a1f" stroke-width="3">
+            <path d="M300 30v330M300 40h-210M300 40l-60 60M300 40l40 40"/>
+            <path d="M120 40v40"/>
+          </g>
+          <rect x="105" y="80" width="30" height="24" fill="#ff5a1f"/>
+          <g fill="#eceae5">
+            <rect x="40" y="170" width="120" height="190"/>
+            <rect x="170" y="220" width="110" height="140"/>
+          </g>
+          <g fill="#2c2f33">
+            <rect x="56" y="190" width="22" height="22"/><rect x="90" y="190" width="22" height="22"/><rect x="124" y="190" width="22" height="22"/>
+            <rect x="56" y="228" width="22" height="22"/><rect x="90" y="228" width="22" height="22"/><rect x="124" y="228" width="22" height="22"/>
+            <rect x="56" y="266" width="22" height="22"/><rect x="90" y="266" width="22" height="22"/><rect x="124" y="266" width="22" height="22"/>
+            <rect x="186" y="240" width="22" height="22"/><rect x="220" y="240" width="22" height="22"/><rect x="254" y="240" width="14" height="22"/>
+          </g>
+          <g stroke="#eceae5" stroke-width="2" fill="none" stroke-dasharray="4 4"><rect x="170" y="150" width="110" height="70"/></g>
+        </svg>
+      </div>
+    </div>
+  </section>
+
+  <div class="stats">
+    <div class="wrap">
+      <div><b>00</b><span>yıllık deneyim</span></div>
+      <div><b>000</b><span>teslim edilen konut</span></div>
+      <div><b>00</b><span>devam eden şantiye</span></div>
+      <div><b>%00</b><span>zamanında teslim oranı</span></div>
+    </div>
+  </div>
+  <div class="stats-note">sayılar örnek alanıdır, gerçek sitede işletmenin verisiyle dolar</div>
+
+  <section id="hizmetler">
+    <div class="wrap">
+      <div class="head">
+        <span class="num">01/</span>
+        <h2>Hizmetler</h2>
+        <p>Arsadan anahtara kadar tek muhatapla çalışırsınız. İsterseniz yalnızca bir aşama için de anlaşabiliriz.</p>
+      </div>
+      <div class="svc">
+        <article><span class="mono">A-01</span><h3>Konut projeleri</h3><p>Kat karşılığı ve müteahhitlik işlerinde projeden iskâna kadar süreç yönetimi.</p></article>
+        <article><span class="mono">A-02</span><h3>Ticari yapılar</h3><p>Mağaza, ofis ve depo binaları için yapım ve iç mekân uygulaması.</p></article>
+        <article><span class="mono">A-03</span><h3>Tadilat ve güçlendirme</h3><p>Eski yapılarda mevcut durum tespiti, güçlendirme ve yenileme işleri.</p></article>
+        <article><span class="mono">B-01</span><h3>Proje ve çizim</h3><p>Mimari, statik ve tesisat projelerinin hazırlanması ve onay süreci.</p></article>
+        <article><span class="mono">B-02</span><h3>Şantiye yönetimi</h3><p>İş programı, taşeron takibi ve haftalık ilerleme raporu.</p></article>
+        <article><span class="mono">B-03</span><h3>Anahtar teslim</h3><p>Kaba inşaattan ince işçiliğe ve peyzaja kadar tek sözleşme.</p></article>
+      </div>
+    </div>
+  </section>
+
+  <section id="projeler">
+    <div class="wrap">
+      <div class="head">
+        <span class="num">02/</span>
+        <h2>Projeler</h2>
+        <p>Proje kartları örnektir. Gerçek sitede fotoğraf, konum ve teslim yılıyla eklenir.</p>
+      </div>
+      <div class="filters">
+        <button class="on" data-f="hepsi">Hepsi</button>
+        <button data-f="konut">Konut</button>
+        <button data-f="ticari">Ticari</button>
+        <button data-f="tadilat">Tadilat</button>
+      </div>
+      <div class="projects">
+        <div class="pj" data-k="konut"><div class="img"><span>KONUT</span><svg viewBox="0 0 120 100"><rect x="20" y="20" width="50" height="80" fill="#2c2f33"/><rect x="72" y="45" width="30" height="55" fill="#ff5a1f"/></svg></div><div class="t"><h3>Örnek Konutları A Blok</h3><p>12 daire · teslim yılı ____</p></div></div>
+        <div class="pj" data-k="ticari"><div class="img"><span>TİCARİ</span><svg viewBox="0 0 120 100"><rect x="10" y="45" width="100" height="55" fill="#2c2f33"/><rect x="10" y="38" width="100" height="8" fill="#ff5a1f"/></svg></div><div class="t"><h3>Örnek Ticaret Merkezi</h3><p>2 kat mağaza · teslim yılı ____</p></div></div>
+        <div class="pj" data-k="tadilat"><div class="img"><span>TADİLAT</span><svg viewBox="0 0 120 100"><rect x="30" y="30" width="60" height="70" fill="#2c2f33"/><path d="M20 30h80M20 30v70M100 30v70" stroke="#ff5a1f" stroke-width="3" fill="none"/></svg></div><div class="t"><h3>Okul binası güçlendirme</h3><p>Güçlendirme · teslim yılı ____</p></div></div>
+        <div class="pj" data-k="konut"><div class="img"><span>KONUT</span><svg viewBox="0 0 120 100"><path d="M15 100V55l30-20 30 20v45z" fill="#2c2f33"/><path d="M70 100V60l20-14 20 14v40z" fill="#ff5a1f"/></svg></div><div class="t"><h3>Örnek Villaları</h3><p>6 müstakil ev · teslim yılı ____</p></div></div>
+        <div class="pj" data-k="ticari"><div class="img"><span>TİCARİ</span><svg viewBox="0 0 120 100"><rect x="35" y="10" width="50" height="90" fill="#2c2f33"/><g fill="#ff5a1f"><rect x="43" y="20" width="10" height="10"/><rect x="67" y="20" width="10" height="10"/><rect x="43" y="40" width="10" height="10"/><rect x="67" y="40" width="10" height="10"/></g></svg></div><div class="t"><h3>Örnek Ofis Binası</h3><p>5 kat ofis · teslim yılı ____</p></div></div>
+        <div class="pj" data-k="tadilat"><div class="img"><span>TADİLAT</span><svg viewBox="0 0 120 100"><rect x="20" y="40" width="80" height="60" fill="#2c2f33"/><rect x="40" y="60" width="40" height="40" fill="#ff5a1f"/></svg></div><div class="t"><h3>Mağaza iç mekân yenileme</h3><p>İç mekân · teslim yılı ____</p></div></div>
+      </div>
+    </div>
+  </section>
+
+  <section id="surec">
+    <div class="wrap">
+      <div class="head">
+        <span class="num">03/</span>
+        <h2>Nasıl çalışıyoruz</h2>
+        <p>Her adımın sonunda imzalı bir tutanak olur. Neyin bittiğini tahmin etmek zorunda kalmazsınız.</p>
+      </div>
+      <ol class="process">
+        <li><b>Keşif</b><span>Arsayı ya da binayı yerinde görüp ihtiyacı dinliyoruz.</span></li>
+        <li><b>Teklif</b><span>Kalem kalem yazılmış, süresi belli bir teklif hazırlıyoruz.</span></li>
+        <li><b>Proje</b><span>Çizimler ve izinler tamamlanıyor.</span></li>
+        <li><b>Uygulama</b><span>Haftalık fotoğraflı rapor size ulaşıyor.</span></li>
+        <li><b>Teslim</b><span>Eksik listesi kapanmadan anahtar verilmiyor.</span></li>
+      </ol>
+    </div>
+  </section>
+
+  <section id="referanslar">
+    <div class="wrap">
+      <div class="head">
+        <span class="num">04/</span>
+        <h2>Referanslar</h2>
+        <p>Birlikte çalışılan kurum ve firmaların logoları burada yer alır.</p>
+      </div>
+      <div class="refs">
+        <div>Referans logo 1</div><div>Referans logo 2</div><div>Referans logo 3</div>
+        <div>Referans logo 4</div><div>Referans logo 5</div><div>Referans logo 6</div>
+      </div>
+      <p class="refs-note">// logolar yalnızca firmaların izniyle eklenir</p>
+    </div>
+  </section>
+
+  <section class="contact" id="iletisim">
+    <div class="wrap">
+      <div>
+        <h2>Arsanız ya da binanız için konuşalım</h2>
+        <p>Keşif için yerinde görüşme ayarlayalım. Teklifi görmeden hiçbir şeye karar vermek zorunda değilsiniz.</p>
+        <div class="cta"><a class="btn" href="#iletisim">Teklif iste →</a></div>
+      </div>
+      <div class="ct">
+        <div><small>TELEFON</small><span>0 (226) 000 00 00</span></div>
+        <div><small>E-POSTA</small><span>teklif@dortgen.example</span></div>
+        <div><small>OFİS</small><span>Örnek Mah. Örnek Cad. No: 0</span></div>
+        <div><small>SAATLER</small><span>Hafta içi 08:30 - 18:00 (örnek)</span></div>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div class="wrap">
+    <span>© Dörtgen Yapı · hayali işletme</span>
+    <span>Tasarım: <a href="https://cyexs.dev">Cyexs Dev · cyexs.dev</a></span>
+  </div>
+</footer>
+
+<script>
+  document.querySelectorAll('.filters button').forEach(function(b){
+    b.addEventListener('click',function(){
+      document.querySelectorAll('.filters button').forEach(function(x){x.classList.remove('on')});
+      b.classList.add('on');
+      document.querySelectorAll('.pj').forEach(function(p){
+        p.classList.toggle('hide', b.dataset.f!=='hepsi' && p.dataset.k!==b.dataset.f);
+      });
+    });
+  });
+</script>
+</body>
+</html>

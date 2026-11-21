@@ -1,0 +1,302 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="robots" content="noindex, nofollow">
+<title>Kekik &amp; Köz (Örnek Tasarım) · Cyexs Dev</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=Work+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --coal:#1b1714; --coal-2:#26201b; --coal-3:#332a23; --cream:#f3e9da; --muted:#bfb09c;
+    --ember:#e2683c; --mustard:#d9a441; --herb:#7d9a5b; --line:rgba(243,233,218,.14);
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html{scroll-behavior:smooth}
+  body{font-family:"Work Sans",system-ui,sans-serif;background:var(--coal);color:var(--cream);line-height:1.65;font-size:16px}
+  a{color:inherit;text-decoration:none}
+  .wrap{max-width:1200px;margin:0 auto;padding:0 24px}
+  .serif{font-family:"DM Serif Display",serif;font-weight:400}
+
+  .demo-bar{background:var(--mustard);color:var(--coal);font-size:13px;text-align:center;padding:8px 16px;font-weight:500}
+  .demo-bar a{font-weight:600;text-decoration:underline}
+
+  header{position:absolute;left:0;right:0;z-index:20}
+  .nav{display:flex;align-items:center;justify-content:space-between;height:84px}
+  .logo{font-family:"DM Serif Display",serif;font-size:26px;letter-spacing:.5px}
+  .logo i{color:var(--ember);font-style:italic}
+  nav{display:flex;gap:30px;font-size:14px;letter-spacing:1.5px;text-transform:uppercase;font-weight:500}
+  nav a{opacity:.85}
+  nav a:hover{opacity:1;color:var(--mustard)}
+  .btn{display:inline-flex;align-items:center;gap:10px;padding:14px 26px;font-weight:600;font-size:14.5px;letter-spacing:.5px;border:1.5px solid var(--cream);transition:background .2s,color .2s}
+  .btn:hover{background:var(--cream);color:var(--coal)}
+  .btn-fill{background:var(--ember);border-color:var(--ember);color:#1b1714}
+  .btn-fill:hover{background:var(--mustard);border-color:var(--mustard)}
+
+  .hero{min-height:640px;position:relative;display:flex;align-items:flex-end;padding:140px 0 70px;overflow:hidden;
+    background:
+      radial-gradient(ellipse 60% 50% at 78% 42%,rgba(226,104,60,.38),transparent 70%),
+      radial-gradient(ellipse 40% 35% at 70% 70%,rgba(217,164,65,.22),transparent 70%),
+      var(--coal)}
+  .hero svg.plate{position:absolute;right:4%;top:110px;width:min(46vw,520px);height:auto;opacity:.95}
+  .hero .wrap{position:relative;width:100%}
+  .hero small{font-size:13px;letter-spacing:3px;text-transform:uppercase;color:var(--mustard);font-weight:600}
+  h1{font-family:"DM Serif Display",serif;font-weight:400;font-size:clamp(48px,8vw,112px);line-height:.95;letter-spacing:-1px;margin:16px 0 22px;max-width:760px}
+  h1 em{color:var(--ember)}
+  .hero p{max-width:460px;color:var(--muted);font-size:18px}
+  .cta{display:flex;gap:12px;flex-wrap:wrap;margin-top:30px}
+
+  .strip{border-top:1px solid var(--line);border-bottom:1px solid var(--line);background:var(--coal-2)}
+  .strip .wrap{display:grid;grid-template-columns:repeat(3,1fr)}
+  .strip div{padding:22px 0;display:flex;gap:14px;align-items:center;font-size:15px}
+  .strip div+div{border-left:1px solid var(--line);padding-left:28px}
+  .strip b{display:block;font-family:"DM Serif Display",serif;font-weight:400;font-size:20px}
+  .strip span{color:var(--muted)}
+
+  section{padding:96px 0}
+  .head{display:flex;justify-content:space-between;align-items:end;gap:30px;margin-bottom:40px;flex-wrap:wrap}
+  .head h2{font-family:"DM Serif Display",serif;font-weight:400;font-size:clamp(36px,5vw,60px);line-height:1}
+  .head h2 em{color:var(--mustard)}
+  .head p{max-width:420px;color:var(--muted)}
+
+  .tabs{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:34px}
+  .tabs button{font:inherit;font-size:14px;letter-spacing:1px;text-transform:uppercase;font-weight:600;background:transparent;color:var(--cream);border:1.5px solid var(--line);padding:10px 20px;border-radius:999px;cursor:pointer}
+  .tabs button[aria-selected="true"]{background:var(--cream);color:var(--coal);border-color:var(--cream)}
+  .menu{display:none;grid-template-columns:1fr 1fr;gap:0 56px}
+  .menu.on{display:grid}
+  .item{padding:20px 0;border-bottom:1px dashed var(--line)}
+  .item h3{font-family:"DM Serif Display",serif;font-weight:400;font-size:23px;display:flex;justify-content:space-between;gap:16px;align-items:baseline}
+  .item h3 span{font-family:"Work Sans";font-size:13px;color:var(--muted);letter-spacing:1px;white-space:nowrap}
+  .item p{color:var(--muted);font-size:15px;margin-top:4px}
+  .badge{display:inline-block;font-size:11px;letter-spacing:1px;text-transform:uppercase;font-weight:600;color:var(--herb);border:1px solid var(--herb);padding:1px 8px;border-radius:999px;margin-left:8px;vertical-align:middle;font-family:"Work Sans"}
+  .menu-note{margin-top:26px;font-size:13.5px;color:var(--muted)}
+
+  .story{background:var(--cream);color:var(--coal)}
+  .story .wrap{display:grid;grid-template-columns:1fr 1fr;gap:64px;align-items:center}
+  .story h2{font-family:"DM Serif Display",serif;font-weight:400;font-size:clamp(34px,4.4vw,54px);line-height:1.05;margin-bottom:20px}
+  .story h2 em{color:#b4471f}
+  .story p{color:#4a4037;font-size:17px;margin-bottom:14px}
+  .story .fire{aspect-ratio:4/5;background:var(--coal);border-radius:240px 240px 0 0;position:relative;overflow:hidden;display:grid;place-items:end center}
+  .story .fire svg{width:70%;margin-bottom:12%}
+  .story .fire span{position:absolute;top:22px;font-size:12px;letter-spacing:2px;text-transform:uppercase;color:var(--muted);font-weight:600}
+
+  .gallery{display:grid;grid-template-columns:repeat(4,1fr);grid-auto-rows:220px;gap:12px}
+  .g{position:relative;overflow:hidden;background:var(--coal-3);display:grid;place-items:center}
+  .g:nth-child(1){grid-column:span 2;grid-row:span 2;background:radial-gradient(circle at 50% 55%,#5a3a26,#26201b 75%)}
+  .g:nth-child(2){background:linear-gradient(135deg,#3b2f22,#5c4426)}
+  .g:nth-child(3){background:linear-gradient(135deg,#2f3a26,#4b5c33)}
+  .g:nth-child(4){grid-column:span 2;background:linear-gradient(120deg,#4a2a1c,#7a3a20)}
+  .g svg{width:46%;max-width:180px;opacity:.9}
+  .g span{position:absolute;left:14px;bottom:12px;font-size:12px;letter-spacing:1.5px;text-transform:uppercase;color:var(--cream);opacity:.85}
+
+  .reserve{background:var(--ember);color:var(--coal)}
+  .reserve .wrap{display:grid;grid-template-columns:1.2fr .8fr;gap:48px;align-items:center}
+  .reserve h2{font-family:"DM Serif Display",serif;font-weight:400;font-size:clamp(38px,5.4vw,68px);line-height:1}
+  .reserve p{font-size:18px;margin-top:16px;max-width:520px}
+  .reserve .btn{border-color:var(--coal);color:var(--coal)}
+  .reserve .btn:hover{background:var(--coal);color:var(--cream)}
+  .reserve .btn-fill{background:var(--coal);color:var(--cream)}
+  .card{background:var(--coal);color:var(--cream);padding:30px;display:grid;gap:16px}
+  .card div{display:flex;justify-content:space-between;gap:12px;border-bottom:1px solid var(--line);padding-bottom:12px;font-size:15px}
+  .card div:last-child{border:0;padding:0}
+  .card small{color:var(--muted)}
+  .card h3{font-family:"DM Serif Display",serif;font-weight:400;font-size:24px}
+
+  footer{padding:34px 0;font-size:13.5px;color:var(--muted);border-top:1px solid var(--line)}
+  footer .wrap{display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap}
+  footer a{color:var(--cream)}
+
+  @media (max-width:900px){
+    nav{display:none}
+    .hero{min-height:auto;padding:110px 0 56px}
+    .hero svg.plate{position:relative;right:auto;top:auto;width:70%;max-width:340px;margin:0 auto 10px;display:block}
+    .hero{flex-direction:column;align-items:stretch}
+    .menu,.story .wrap,.reserve .wrap{grid-template-columns:1fr}
+    .strip .wrap{grid-template-columns:1fr}
+    .strip div+div{border-left:0;border-top:1px solid var(--line);padding-left:0}
+    .gallery{grid-template-columns:1fr 1fr;grid-auto-rows:160px}
+    .story .fire{max-width:380px;width:100%;margin:0 auto}
+    section{padding:64px 0}
+  }
+  @media (max-width:520px){
+    .nav .btn{padding:10px 16px;font-size:13px}
+    .gallery .g:nth-child(4){grid-column:span 2}
+  }
+</style>
+</head>
+<body>
+
+<div class="demo-bar">Bu sayfa <a href="https://cyexs.dev">Cyexs Dev</a>'in hazırladığı örnek bir tasarımdır; işletme hayalidir.</div>
+
+<header>
+  <div class="wrap nav">
+    <a class="logo" href="#">Kekik <i>&amp;</i> Köz</a>
+    <nav>
+      <a href="#menu">Menü</a>
+      <a href="#hikaye">Hikâyemiz</a>
+      <a href="#galeri">Galeri</a>
+      <a href="#rezervasyon">İletişim</a>
+    </nav>
+    <a class="btn btn-fill" href="#rezervasyon">Masa ayırt</a>
+  </div>
+</header>
+
+<main>
+  <section class="hero">
+    <svg class="plate" viewBox="0 0 520 520" aria-hidden="true">
+      <circle cx="260" cy="260" r="230" fill="#26201b" stroke="#3a3029" stroke-width="2"/>
+      <circle cx="260" cy="260" r="180" fill="#f3e9da"/>
+      <circle cx="260" cy="260" r="180" fill="none" stroke="#d9a441" stroke-width="3" stroke-dasharray="2 10"/>
+      <g stroke="#1b1714" stroke-width="4" stroke-linecap="round">
+        <path d="M150 300 L370 210" />
+        <path d="M150 330 L370 240" />
+      </g>
+      <g fill="#b4471f">
+        <ellipse cx="200" cy="270" rx="34" ry="22" transform="rotate(-22 200 270)"/>
+        <ellipse cx="265" cy="244" rx="34" ry="22" transform="rotate(-22 265 244)"/>
+        <ellipse cx="330" cy="218" rx="34" ry="22" transform="rotate(-22 330 218)"/>
+      </g>
+      <g fill="#7d9a5b">
+        <ellipse cx="215" cy="340" rx="16" ry="7" transform="rotate(30 215 340)"/>
+        <ellipse cx="240" cy="352" rx="16" ry="7" transform="rotate(-20 240 352)"/>
+        <ellipse cx="320" cy="318" rx="16" ry="7" transform="rotate(40 320 318)"/>
+        <ellipse cx="345" cy="300" rx="14" ry="6" transform="rotate(-10 345 300)"/>
+      </g>
+      <circle cx="190" cy="200" r="22" fill="#e2683c"/>
+      <circle cx="350" cy="320" r="18" fill="#d9a441"/>
+    </svg>
+    <div class="wrap">
+      <small>Ocakbaşı · Kahvaltı · Akşam yemeği</small>
+      <h1>Közün başında <em>uzun</em> sofralar</h1>
+      <p>Sabah kahvaltısıyla açılan, akşam ızgaranın başında kapanan bir mahalle lokantası. Mevsiminde ne varsa onu pişiriyoruz.</p>
+      <div class="cta">
+        <a class="btn btn-fill" href="#rezervasyon">Rezervasyon yap</a>
+        <a class="btn" href="#menu">Menüye göz at</a>
+      </div>
+    </div>
+  </section>
+
+  <div class="strip">
+    <div class="wrap">
+      <div><svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="#d9a441" stroke-width="1.8"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg><span><b>Her gün açık</b>Örnek saatler: 08:00 - 23:00</span></div>
+      <div><svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="#d9a441" stroke-width="1.8"><path d="M4 21V10l8-6 8 6v11"/><path d="M9 21v-6h6v6"/></svg><span><b>Bahçe ve salon</b>Kalabalık sofralara yer açarız</span></div>
+      <div><svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="#d9a441" stroke-width="1.8"><path d="M12 3c4 4 6 7 6 10a6 6 0 0 1-12 0c0-3 2-6 6-10z"/></svg><span><b>Odun ateşi</b>Izgaralar közde pişer</span></div>
+    </div>
+  </div>
+
+  <section id="menu">
+    <div class="wrap">
+      <div class="head">
+        <h2 class="serif">Bugün <em>neler</em> pişiyor</h2>
+        <p>Menü mevsime göre değişir. Günün yemeklerini her sabah tahtaya yazıyoruz.</p>
+      </div>
+      <div class="tabs" role="tablist">
+        <button role="tab" aria-selected="true" data-t="kahvalti">Kahvaltı</button>
+        <button role="tab" aria-selected="false" data-t="izgara">Izgara</button>
+        <button role="tab" aria-selected="false" data-t="meze">Meze</button>
+        <button role="tab" aria-selected="false" data-t="tatli">Tatlı ve içecek</button>
+      </div>
+
+      <div class="menu on" id="kahvalti">
+        <div class="item"><h3>Serpme kahvaltı <span>2 kişilik</span></h3><p>Peynir çeşitleri, zeytin, bal-kaymak, reçel, sıcak pişi ve demlik çay.</p></div>
+        <div class="item"><h3>Sahanda menemen</h3><p>Domates, biber ve yumurta. Soğanlı ya da soğansız.</p></div>
+        <div class="item"><h3>Közde gözleme <span class="badge">Vejetaryen</span></h3><p>Peynirli, patatesli ya da ıspanaklı, saç üstünde.</p></div>
+        <div class="item"><h3>Kuymak</h3><p>Mısır unu ve tereyağıyla, bakır tavada.</p></div>
+      </div>
+      <div class="menu" id="izgara">
+        <div class="item"><h3>Köz köfte</h3><p>Közlenmiş biber, domates ve sumaklı soğan ile.</p></div>
+        <div class="item"><h3>Kuzu şiş</h3><p>Kekikle marine edilmiş kuzu, bulgur pilavıyla.</p></div>
+        <div class="item"><h3>Tavuk kanat</h3><p>Pul biberli sos, lavaş ve yeşillik.</p></div>
+        <div class="item"><h3>Közde sebze tabağı <span class="badge">Vejetaryen</span></h3><p>Patlıcan, kabak, biber ve mantar, zeytinyağı ve kekikle.</p></div>
+      </div>
+      <div class="menu" id="meze">
+        <div class="item"><h3>Közlenmiş patlıcan salatası</h3><p>Sarımsak, yoğurt ve zeytinyağı.</p></div>
+        <div class="item"><h3>Acılı ezme</h3><p>Elde doğranmış domates, biber ve nar ekşisi.</p></div>
+        <div class="item"><h3>Haydari</h3><p>Süzme yoğurt, dereotu ve nane.</p></div>
+        <div class="item"><h3>Mevsim salatası <span class="badge">Vegan</span></h3><p>Tezgâhta o gün ne varsa.</p></div>
+      </div>
+      <div class="menu" id="tatli">
+        <div class="item"><h3>Fırın sütlaç</h3><p>Toprak kapta, üstü kızarmış.</p></div>
+        <div class="item"><h3>Közde ayva</h3><p>Kaymak ve ceviz ile.</p></div>
+        <div class="item"><h3>Demlik çay</h3><p>İnce belli bardakta, istediğiniz kadar.</p></div>
+        <div class="item"><h3>Ev yapımı limonata</h3><p>Taze nane ile.</p></div>
+      </div>
+      <p class="menu-note">Örnek menüdür. Gerçek sitede yemekler ve fiyatlar işletmenin kendi listesinden eklenir, bakım paketinde güncellenir.</p>
+    </div>
+  </section>
+
+  <section class="story" id="hikaye">
+    <div class="wrap">
+      <div class="fire" aria-hidden="true">
+        <span>Mutfak fotoğrafınız</span>
+        <svg viewBox="0 0 200 220">
+          <path d="M100 10c30 40 60 70 60 120a60 60 0 0 1-120 0c0-30 15-50 30-70 0 25 10 35 20 40-5-35 0-60 10-90z" fill="#e2683c"/>
+          <path d="M100 90c15 20 30 35 30 60a30 30 0 0 1-60 0c0-15 8-25 15-35 0 12 5 18 10 20-2-18 0-30 5-45z" fill="#d9a441"/>
+          <rect x="30" y="196" width="140" height="10" rx="5" fill="#5a3a26"/>
+        </svg>
+      </div>
+      <div>
+        <h2>Acele etmeden pişen yemeğin <em>tadı</em> başka olur</h2>
+        <p>Ateşi sabah erkenden yakıyoruz. Köz kıvamına gelene kadar bekliyor, etleri ve sebzeleri ondan sonra ızgaraya diziyoruz.</p>
+        <p>Buraya işletmenin kendi hikâyesi gelir: nasıl başladığı, mutfakta kimlerin olduğu, neden bu yemekleri seçtiği.</p>
+      </div>
+    </div>
+  </section>
+
+  <section id="galeri">
+    <div class="wrap">
+      <div class="head">
+        <h2 class="serif">Sofradan <em>kareler</em></h2>
+        <p>Fotoğraf alanları. Gerçek sitede salonunuz, tabaklarınız ve bahçeniz burada yer alır.</p>
+      </div>
+      <div class="gallery">
+        <div class="g"><svg viewBox="0 0 100 100"><circle cx="50" cy="50" r="40" fill="#f3e9da"/><circle cx="50" cy="50" r="30" fill="#d9a441"/><circle cx="42" cy="45" r="8" fill="#b4471f"/><circle cx="58" cy="56" r="6" fill="#7d9a5b"/></svg><span>Kahvaltı sofrası</span></div>
+        <div class="g"><svg viewBox="0 0 100 100"><rect x="25" y="30" width="50" height="45" rx="6" fill="#f3e9da"/><rect x="75" y="40" width="10" height="20" rx="4" fill="none" stroke="#f3e9da" stroke-width="5"/></svg><span>Çay</span></div>
+        <div class="g"><svg viewBox="0 0 100 100"><path d="M20 70c10-30 50-30 60 0z" fill="#7d9a5b"/><circle cx="50" cy="38" r="10" fill="#f3e9da"/></svg><span>Bahçe</span></div>
+        <div class="g"><svg viewBox="0 0 100 100"><path d="M10 60h80" stroke="#f3e9da" stroke-width="4"/><g fill="#e2683c"><ellipse cx="30" cy="52" rx="10" ry="6"/><ellipse cx="50" cy="52" rx="10" ry="6"/><ellipse cx="70" cy="52" rx="10" ry="6"/></g></svg><span>Izgara başı</span></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="reserve" id="rezervasyon">
+    <div class="wrap">
+      <div>
+        <h2>Kalabalık geliyorsanız haber verin</h2>
+        <p>Doğum günü, aile yemeği ya da iş yemeği için masanızı önceden hazırlayalım. Bir mesaj atmanız yeterli.</p>
+        <div class="cta">
+          <a class="btn btn-fill" href="#rezervasyon">WhatsApp'tan yazın</a>
+          <a class="btn" href="#rezervasyon">Arayın</a>
+        </div>
+      </div>
+      <div class="card">
+        <h3>İletişim</h3>
+        <div><small>Telefon</small><span>0 (226) 000 00 00</span></div>
+        <div><small>E-posta</small><span>masa@kekikkoz.example</span></div>
+        <div><small>Adres</small><span>Örnek Mah. Örnek Sok. No: 0</span></div>
+        <div><small>Saatler</small><span>Örnek: 08:00 - 23:00</span></div>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div class="wrap">
+    <span>© Kekik &amp; Köz · hayali işletme</span>
+    <span>Tasarım: <a href="https://cyexs.dev">Cyexs Dev · cyexs.dev</a></span>
+  </div>
+</footer>
+
+<script>
+  document.querySelectorAll('.tabs button').forEach(function(b){
+    b.addEventListener('click',function(){
+      document.querySelectorAll('.tabs button').forEach(function(x){x.setAttribute('aria-selected','false')});
+      document.querySelectorAll('.menu').forEach(function(m){m.classList.remove('on')});
+      b.setAttribute('aria-selected','true');
+      document.getElementById(b.dataset.t).classList.add('on');
+    });
+  });
+</script>
+</body>
+</html>
