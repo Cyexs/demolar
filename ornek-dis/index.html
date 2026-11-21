@@ -39,7 +39,7 @@
   .hero .wrap{display:grid;grid-template-columns:1fr 1fr;gap:40px;align-items:center}
   .pill{display:inline-flex;align-items:center;gap:8px;background:#fff;border:1px solid var(--line);border-radius:999px;padding:6px 14px 6px 8px;font-size:13.5px;font-weight:600;color:var(--navy)}
   .pill i{width:22px;height:22px;border-radius:50%;background:var(--mint);display:grid;place-items:center;font-style:normal;color:#fff;font-size:13px}
-  h1{font-size:clamp(36px,4.6vw,56px);line-height:1.1;letter-spacing:-1.2px;font-weight:800;color:var(--navy);margin:20px 0 18px}
+  h1{font-size:clamp(36px,4.6vw,56px);line-height:1.1;letter-spacing:-.02em;font-weight:800;color:var(--navy);margin:20px 0 18px}
   h1 span{color:var(--blue)}
   .lead{font-size:18px;color:var(--muted);max-width:500px}
   .cta{display:flex;gap:12px;flex-wrap:wrap;margin-top:30px}
@@ -55,20 +55,21 @@
 
   .quick{margin-top:-10px}
   .quick .wrap{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
-  .quick div{border:1px solid var(--line);border-radius:16px;padding:20px 22px;display:flex;gap:14px;align-items:center;background:#fff}
+  .quick .wrap>div{border:1px solid var(--line);border-radius:16px;padding:20px 22px;display:flex;gap:14px;align-items:center;background:#fff}
   .quick b{display:block;color:var(--navy)}
   .quick span{font-size:14px;color:var(--muted)}
 
   section{padding:84px 0}
   .head{text-align:center;max-width:640px;margin:0 auto 46px}
   .eyebrow{font-size:13px;font-weight:700;color:#137a65;letter-spacing:1px;text-transform:uppercase}
-  h2{font-size:clamp(28px,3.4vw,40px);line-height:1.15;letter-spacing:-.8px;color:var(--navy);margin:8px 0 12px;font-weight:800}
+  h2{font-size:clamp(28px,3.4vw,40px);line-height:1.15;letter-spacing:-.02em;color:var(--navy);margin:8px 0 12px;font-weight:800}
   .head p{color:var(--muted)}
 
   .grid{display:grid;grid-template-columns:repeat(4,1fr);gap:18px}
   .tr{border:1px solid var(--line);border-radius:18px;padding:26px 22px;transition:border-color .2s,box-shadow .2s;background:#fff}
   .tr:hover{border-color:var(--blue);box-shadow:0 18px 40px -26px rgba(31,95,168,.5)}
-  .tr .ic{width:48px;height:48px;border-radius:14px;background:var(--sky);display:grid;place-items:center;margin-bottom:16px}
+  .tr{display:grid;grid-template-columns:auto 1fr;column-gap:14px;align-items:start;align-content:start}
+  .tr .ic{grid-row:span 2;padding-top:2px}
   .tr h3{font-size:17.5px;color:var(--navy);margin-bottom:6px}
   .tr p{font-size:14.5px;color:var(--muted)}
 
@@ -196,7 +197,6 @@
   <section id="tedaviler">
     <div class="wrap">
       <div class="head">
-        <span class="eyebrow">Tedaviler</span>
         <h2>Ağız sağlığınız için ihtiyaç duyacağınız her şey</h2>
         <p>Hangi tedavinin size uygun olduğuna muayeneden sonra birlikte karar veriyoruz.</p>
       </div>
@@ -216,7 +216,6 @@
   <section class="visit" id="ilk-muayene">
     <div class="wrap">
       <div>
-        <span class="eyebrow">İlk muayene</span>
         <h2>İlk gelişinizde neler olacağını şimdiden bilin</h2>
         <p>Muayene yaklaşık yarım saat sürer. Sonunda elinizde yazılı bir plan olur, karar vermek için acele etmezsiniz.</p>
       </div>
@@ -232,7 +231,6 @@
   <section id="ekip">
     <div class="wrap">
       <div class="head">
-        <span class="eyebrow">Ekibimiz</span>
         <h2>Sizi karşılayacak hekimler</h2>
         <p>Hekim fotoğrafları ve bilgileri işletme tarafından eklenir.</p>
       </div>
@@ -247,7 +245,6 @@
   <section id="sorular" style="padding-top:0">
     <div class="wrap">
       <div class="head">
-        <span class="eyebrow">Sık sorulanlar</span>
         <h2>Aklınıza takılabilecekler</h2>
       </div>
       <div class="faq">
@@ -262,7 +259,6 @@
   <section class="book" id="randevu">
     <div class="wrap">
       <div>
-        <span class="eyebrow">Randevu</span>
         <h2>Size uygun saati seçin, biz arayalım</h2>
         <p style="color:var(--muted)">Formu doldurun ya da doğrudan arayın. Çalışma saatlerimiz:</p>
         <div class="hours">
